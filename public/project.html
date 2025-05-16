@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio - Projects</title>
+  <link rel="stylesheet" href="project.css">
+   <link rel="stylesheet" href="nav.css">
+</head>
+<body>
+
+  <!-- Section for Projects -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <h2 class="section-title">My Projects</h2>
+      
+      <!-- Display Projects -->
+      <div class="project-grid" id="project-grid">
+        <!-- Dynamic project cards will be added here -->
+      </div>
+
+      <!-- Project Submission Form -->
+      <div class="add-project-form">
+        <h3>Add a New Project</h3>
+        <form id="project-form">
+          <input type="text" id="project-title" placeholder="Project Title" required>
+          <input type="text" id="project-description" placeholder="Short Description" required>
+         
+          
+          <button type="submit">Add Project</button>
+        </form>
+      </div>
+    </div>
+  </section>
+<script>
+  const form = document.getElementById('project-form');
+const projectGrid = document.getElementById('project-grid');
+
+form.addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const title = document.getElementById('project-title').value.trim();
+  const description = document.getElementById('project-description').value.trim();
+
+  try {
+    const res = await fetch('http://localhost:5000/api/projects', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', // Important for sending JSON
+      },
+      body: JSON.stringify({ title, description }) // Send the title and description in the request body
+    });
+
+    const result = await res.json();
+    alert(result.message || 'Project added!');
+    form.reset();
+    loadProjects();  // Load updated list of projects after successful submission
+
+  } catch (err) {
+    alert('Error submitting project.');
+    async function loadProjects() {
+  try {
+    const res = await fetch('http://localhost:5000/api/projects');
+    const projects = await res.json();
+    
+    // Clear the existing project grid
+    projectGrid.innerHTML = '';
+
+    // Add each project to the grid
+    projects.forEach(project => {
+      const projectCard = document.createElement('div');
+      projectCard.classList.add('project-card');
+      projectCard.innerHTML = `
+        <div class="content">
+          <h3>${project.title}</h3>
+          <p>${project.description}</p>
+        </div>
+      `;
+      projectGrid.appendChild(projectCard);
+    });
+  } catch (err) {
+    console.error('Error loading projects:', err);
+  }
+}
+
+// Call loadProjects to populate the project grid when the page loads
+loadProjects();
+
+  }
+});
+
+
+</script>
+ <nav>
+  <div class="container">
+    <ul class="nav-links">
+      <a href="index.html">Home</a>&nbsp;&nbsp;&nbsp;
+      <a href="about.html">About</a>&nbsp;&nbsp;&nbsp;
+      <a href="resume.html">Resume</a>&nbsp;&nbsp;&nbsp;
+      <a href="contact.html">Contact</a>&nbsp;&nbsp;&nbsp;
+      <a href="project.html">Projects</a>&nbsp;&nbsp;&nbsp;
+    </ul>
+  </div>
+</nav>
+  <script src="project2.js"></script>
+</body>
+</html>

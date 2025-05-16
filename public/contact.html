@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Form</title>
+  <link rel="stylesheet" href="style.css">
+  
+   
+  </head>
+
+  <body>
+    <section class="contact">
+        <h2>Contact Me !</h2>
+
+        <form action="#">
+            <div class="input-box">
+                <div class="input-field field">
+                   <input type="text" placeholder="Full Name" id="name"
+                   class="item" autocomplete="off"> 
+                   <div class="error-txt">Full name can't be blank</div>
+                </div>
+                <div class="input-field field">
+                    <input type="text" placeholder="Email Address" id="email"
+                    class="item" autocomplete="off"> 
+                    <div class="error-txt"> Email Address can't be blank</div>
+                 </div></div>
+                 <div class="input-box">
+                    <div class="input-field field">
+                       <input type="text" placeholder="Phone Number" id="phone"
+                       class="item" autocomplete="off"> 
+                       <div class="error-txt"> Phone Numbercan't be blank</div>
+                    </div>
+                    <div class="input-field field">
+                        <input type="text" placeholder="Subject" id="subject"
+                        class="item" autocomplete="off"> 
+                        <div class="error-txt">subject can't be blank</div>
+                     </div>
+            </div>
+            <div class="textarea-field field">
+                <textarea name="" id="message" cols="30" rows="10"
+                placeholder="Your message" class="item"
+                autocomplete="off"></textarea>
+                <div class="error-txt">Message can't be blank</div>
+            </div>
+            <button type="submit">Send message</button>
+        </form>
+    </section>
+    
+    <script>
+        //validation check
+
+  
+  const form = document.querySelector('form');
+  const fields = document.querySelectorAll('.field');
+  const items = document.querySelectorAll('.item');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    let isValid = true;
+
+    // Hide all error messages initially
+    document.querySelectorAll('.error-txt').forEach(el => el.style.display = 'none');
+
+    // Simple validation rules
+    items.forEach((input, index) => {
+      if (input.value.trim() === '') {
+        fields[index].querySelector('.error-txt').style.display = 'block';
+        isValid = false;
+      }
+    });
+
+    // Additional validation for email
+    const emailField = document.getElementById('email');
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!emailPattern.test(emailField.value.trim())) {
+      emailField.nextElementSibling.textContent = 'Enter a valid email address';
+      emailField.nextElementSibling.style.display = 'block';
+      isValid = false;
+    }
+
+    // Additional validation for phone
+    const phoneField = document.getElementById('phone');
+    const phonePattern = /^[0-9]{10}$/;
+    if (!phonePattern.test(phoneField.value.trim())) {
+      phoneField.nextElementSibling.textContent = 'Enter a valid 10-digit phone number';
+      phoneField.nextElementSibling.style.display = 'block';
+      isValid = false;
+    }
+
+    if (!isValid) return; // Stop if any validation fails
+
+    // Send data if validation passes
+    const data = {
+      name: document.getElementById('name').value,
+      email: emailField.value,
+      phone: phoneField.value,
+      subject: document.getElementById('subject').value,
+      message: document.getElementById('message').value
+    };
+
+    try {
+      const res = await fetch('/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      alert(result.message || 'Submitted!');
+      form.reset();
+    } catch (err) {
+      alert('Submission failed.');
+    }
+  });
+</script><br>
+ 
+
+
+  </body>
+  </html>

@@ -1,0 +1,44 @@
+/* Base styles for the page */
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Navigation Bar Styles */
+nav {
+  position: fixed;  /* Fix the position of the nav bar */
+  bottom: 0;  /* Align it to the bottom of the page */
+  width: 100%;  /* Make it full width */
+  height: 80px;  /* Reduced height for the nav bar */
+   /* Optional: To make the navbar background darker */
+  color: white;
+  padding: 5px 0;  /* Reduced padding for a smaller vertical space */
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);  /* Optional shadow for styling */
+}
+
+/* Navigation Links Styling */
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;  /* Center the links horizontally */
+  align-items: center;  /* Center the links vertically */
+  margin: 0;
+  padding: 0;
+}
+
+/* Individual link styling */
+.nav-links a {
+  color: rgb(32, 14, 14);  /* Make text white */
+  text-decoration: none;
+  padding: 5px 10px;  /* Reduced padding for smaller links */
+  font-size: 0.9rem;  /* Smaller font size for a more compact look */
+}
+
+/* Link hover effect */
+.nav-links a:hover {
+  background-color: #0077ff;  /* Change color on hover */
+  border-radius: 5px;
+  text-decoration: none;
+}

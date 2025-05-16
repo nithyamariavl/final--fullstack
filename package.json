@@ -1,0 +1,26 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@mongodb-js/saslprep": "^1.2.2",
+    "cors": "^2.8.5",
+    "mongoose": "^8.14.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nithyamariavl/full-stack.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/nithyamariavl/full-stack/issues"
+  },
+  "homepage": "https://github.com/nithyamariavl/full-stack#readme"
+}
