@@ -9,16 +9,12 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
-    "@mongodb-js/saslprep": "^1.2.2",
+  "dependencies":{
+    "express":"^4.17.1",
     "cors": "^2.8.5",
     "mongoose": "^8.14.3"
   },
   "repository": {
-    "dependencies": {
-  "express": "^4.18.2"
-}
-
     "type": "git",
     "url": "git+https://github.com/nithyamariavl/full-stack.git"
   },
